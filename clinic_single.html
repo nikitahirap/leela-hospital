@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Leela Eye Institute - Single File Clone</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root{
+  --yellow:#f1bf00;
+  --maroon:#9f4b4b;
+  --muted:#efefef;
+  --dark:#222;
+  --container:1200px;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+body{font-family: "Segoe UI", Arial, sans-serif;color:#222;margin:0;background:#fff;line-height:1.5}
+.container{max-width:var(--container);margin:0 auto;padding:0 20px}
+
+/* TOP LOGOS ROW */
+.top-logos{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#fff;border-bottom:1px solid #eee}
+.brand-logo{height:56px}
+.top-logos .partners{display:flex;align-items:center;gap:20px}
+.top-logos .partners img{height:42px;object-fit:contain}
+
+/* NAV */
+.site-header{background:var(--yellow);box-shadow:0 2px 0 rgba(0,0,0,0.06);position:sticky;top:0;z-index:60}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo-left img{height:48px;background:#fff;padding:6px;border-radius:6px}
+.main-nav{display:flex;gap:28px;align-items:center}
+.main-nav a{font-weight:700;color:#111;text-decoration:none;padding:12px 6px}
+.main-nav a.active{color:var(--maroon)}
+.dropdown{position:relative}
+.dropdown-content{display:none;position:absolute;background:white;top:40px;left:0;box-shadow:0 6px 18px rgba(0,0,0,0.08);border-radius:6px;min-width:160px}
+.dropdown:hover .dropdown-content{display:block}
+.dropdown-content a{display:block;padding:8px 12px;color:#333;text-decoration:none;white-space:nowrap}
+.btn-appointment{background:#9b5050;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700}
+
+/* HERO */
+.hero{display:flex;align-items:center;min-height:480px;background:#f7f7f7}
+.hero-left{flex:1;padding:60px 40px}
+.hero-left h2{font-size:44px;color:#111;margin:0;font-weight:700}
+.hero-left h1{font-size:58px;color:var(--maroon);margin:6px 0}
+.lead{color:#444;margin-top:10px}
+.hero-right{flex:1;background-image:url('/mnt/data/bf0d916c-77f0-4e41-b855-af1abf5d1add.png');background-size:cover;background-position:center;height:420px;border-left:40px solid rgba(255,255,255,0.8);box-shadow:inset 0 0 80px rgba(255,255,255,0.6)}
+
+/* ABOUT */
+.about{padding:48px 0;display:flex;gap:40px;align-items:center}
+.about-image img{width:100%;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.title-maroon{color:var(--maroon);font-size:36px;margin:8px 0 18px}
+
+/* SPECIALTIES GRID */
+.specialties{padding:40px 0}
+.center-section{text-align:center;font-size:36px;margin-bottom:18px;color:var(--maroon);font-family: 'Times New Roman', serif;}
+.grid{display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
+.card{width:260px;background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,0.08)}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:8px;border-right:8px solid #ffd400}
+.card-title{margin-top:12px;color:var(--maroon);font-weight:700}
+
+/* DOCTOR HIGHLIGHT */
+.doctor-highlight{display:flex;align-items:stretch;margin:40px 0}
+.doc-left{flex:1}
+.doc-left img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.doc-right{flex:1;padding:40px;display:flex;align-items:center}
+.maroon-bg{background:var(--maroon);color:#fff}
+.doc-inner .pre{color:#ffd97a;font-weight:700;margin-bottom:10px}
+.doc-inner h2{font-size:36px;margin:0}
+.doc-inner .role{color:#ffd; margin-top:8px; font-weight:600}
+
+/* FOOTER */
+.site-footer{background:#fafafa;padding:28px 0;border-top:1px solid #eee}
+.footer-grid{display:flex;gap:40px;align-items:flex-start}
+.footer-brand img{height:60px}
+.footer-links h4{font-size:18px;margin-bottom:12px}
+.footer-links ul{list-style:none;padding-left:0}
+.footer-links li{margin-bottom:8px}
+.footer-contact h4{margin-bottom:6px}
+.footer-grid > div{flex:1}
+.copyright{text-align:center;padding:14px 0;color:#666;border-top:1px solid #eee}
+
+/* top & whatsapp */
+.whatsapp{position:fixed;left:18px;bottom:18px;width:64px;height:64px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.18);z-index:80;color:#fff;font-weight:700}
+.top-btn{position:fixed;right:18px;bottom:18px;border-radius:50%;width:56px;height:56px;background:#444;color:#fff;border:none;font-size:20px;display:none;z-index:80}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+  .hero{flex-direction:column}
+  .hero-right{height:260px;border-left:0;border-top:12px solid rgba(0,0,0,0.03)}
+  .about{flex-direction:column}
+  .grid{justify-content:flex-start}
+  .footer-grid{flex-direction:column;gap:16px}
+  .main-nav{display:none}
+}
+
+.carousel-item {
+  height: 90vh;
+}
+
+.slide-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.slide-mask {
+  background: rgba(0,0,0,0.4);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.slide-mask h2 {
+  font-size: 60px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.slide-mask span {
+  color: #ffd400;
+}
+
+.slide-mask p {
+  color: #eee;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- TOP LOGOS ROW -->
+<div class="top-logos container">
+  <img class="brand-logo" src="logo.png" alt="Leela logo">
+  <div class="partners">
+    <img src="logo1.png" alt="partner1">
+    <img src="logo2.png" alt="partner2">
+    <img src="logo3.png" alt="partner3">
+    <img src="logo4.png" alt="partner4">
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="site-header">
+  <div class="nav-wrap container">
+    <div class="logo-left"><img src="logo.png" alt="logo-small"></div>
+
+    <nav class="main-nav">
+      <a href="#" class="active">HOME</a>
+      <div class="dropdown">
+        <a href="#">ABOUT US ▾</a>
+        <div class="dropdown-content">
+          <a href="#">About Clinic</a>
+          <a href="#">About Doctors</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">SPECIALITY ▾</a>
+        <div class="dropdown-content">
+          <a href="#">Cataract</a>
+          <a href="#">Retina</a>
+          <a href="#">Eye checkup</a>
+          <a href="#">Medical and Surgical retina </a>
+          <a href="#">Lasik</a>
+          <a href="#">Refractive surgery</a>
+          <a href="#">Diabetic retinopathy</a>
+          <a href="#">Pharmacy</a>
+          <a href="#">Glaucoma</a>
+        </div>
+      </div>
+
+      <a href="#">TESTIMONIALS</a>
+      <a href="#">GALLERY</a>
+      <a href="C:\Users\User\Desktop\assignment\contact.html">CONTACT US</a>
+    </nav>
+
+    <a class="btn-appointment" href="#">APPOINTMENT</a>
+  </div>
+</header>
+
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+
+  <div class="carousel-inner">
+
+    <!-- SLIDE 1 -->
+    <div class="carousel-item active">
+      <div class="slide-bg" style="background-image:url('Leela Eye Institute_files/Refractive-Surgery.jpg')">
+        <div class="slide-mask">
+          <div class="container">
+            <h2>Your eyes,<br><span>our expertise</span></h2>
+            <p>We're here to help you see eye to eye with clarity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="carousel-item">
+      <div class="slide-bg" style="background-image:url('C:\Users\User\Desktop\assignment\img1.png')">
+        <div class="slide-mask">
+          <div class="container">
+            <h2><span>Clear vision,</span><br>brighter tomorrow</h2>
+            <p>Focused on your vision, always.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="carousel-item">
+      <div class="slide-bg" style="background-image:url('/mnt/data/82e3c1a4-feee-4f8d-862e-6edaebd27f36.png')">
+        <div class="slide-mask">
+          <div class="container">
+            <h2><span>See the world</span><br>in a new light</h2>
+            <p>We're here to help you see eye to eye with clarity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+
+<!-- ABOUT -->
+<section class="about container">
+  <div class="about-image">
+    <img src="Leela Eye Institute_files/chief_doctor_700x800.png" alt="building">
+  </div>
+  <div class="about-text">
+    <h3 class="title-maroon">WELCOME TO</h3>
+    <h2 class="title-maroon">LEELA EYE INSTITUTE LLP</h2>
+    <p><strong>LEELA EYE INSTITUTE LLP</strong> was inaugurated on 30th April 2006 at Iqbal Towers, Murbad Road, Kalyan. The eye clinic shifted to a huge 3500 sq.ft premise at Patel Plaza in 2015.</p>
+    <a class="read-more" href="#">Read More</a>
+  </div>
+</section>
+
+<!-- SPECIALTIES -->
+<section class="specialties container">
+  <h2 class="center-section">OUR SPECIALTIES</h2>
+  <div class="grid">
+    <div class="card">
+      
+								
+      <img src="Leela Eye Institute_files/Cataract.jpg" alt="cataract">
+      <div class="card-title">CATARACT</div>
+    </div>
+    <div class="card">
+      <img src="Leela Eye Institute_files/Glaucoma.jpg" alt="glaucoma">
+      <div class="card-title">GLAUCOMA</div>
+    </div>
+    <div class="card">
+      <img src="Leela Eye Institute_files/Retina.jpg" alt="retina">
+      <div class="card-title">SURGICAL RETINA</div>
+    </div>
+    <div class="card">
+      <img src="Leela Eye Institute_files/Pediatric.jpg" alt="pediatric">
+      <div class="card-title">PEDIATRIC OPHTHALMOLOGY</div>
+    </div>
+    <div class="card">
+      <img src="C:\Users\User\Desktop\assignment\Leela Eye Institute_files\cornea.jpg" alt="pediatric">
+      <div class="card-title">Cornea</div>
+    </div>
+    <div class="card">
+      <img src="C:\Users\User\Desktop\assignment\Leela Eye Institute_files\Diabetic-Retinopathy.jpg" alt="pediatric">
+      <div class="card-title">Diabetic Retinopathy</div>
+    </div>
+    <div class="card">
+      <img src="Leela Eye Institute_files/Lasik.jpg" alt="pediatric">
+      <div class="card-title">LASIK</div>
+    </div>
+    <div class="card">
+      <img src="Leela Eye Institute_files/Refractive-Surgery.jpg" alt="pediatric">
+      <div class="card-title">Refractive Surgery</div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTOR HIGHLIGHT -->
+<section class="doctor-highlight container">
+  <div class="doc-left">
+    <img src="doctor.png" alt="doctor">
+  </div>
+  <div class="doc-right maroon-bg">
+    <div class="doc-inner">
+      <div class="pre">ABOUT DOCTORS</div>
+      <h2>DR. ABHIJIT WADEKAR</h2>
+      <p class="role">MS DNB, CORNEA SPECIALIST</p>
+      <p>Did his MBBS from Lokmanya Tilak Medical College, Sion. Did his MS and DNB in Ophthalmology from INHS Ashwini, Colaba. Fellowship in Cornea and Anterior Segment from L V Prasad Eye Institute.</p>
+      <a class="read-more light" href="#">Know More</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="logo.png" alt="leela">
+      <p>1st Floor, Patel Plaza, Murbad Road, Kalyan.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Specialties</h4>
+      <ul>
+        <li>Eye Checkup</li>
+        <li>Cataract</li>
+        <li>Glaucoma</li>
+        <li>Retina</li>
+        <li>Medical and surgical retina</li>
+         <li>Lasik</li>
+          <li>Optical Outlet</li>
+          <li>Refratctive Surgery</li>
+           <li>Pharmacy</li>
+
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h4>Useful Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Doctors</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">About clinic</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>info@leelaeyeinstitutellp.com<br>+91-8108731794</p>
+    </div>
+  </div>
+
+  <div class="copyright">© 2025 All Rights Reserved --</div>
+</footer>
+
+<!-- WHATSAPP FLOAT + TOP BTN -->
+<a class="whatsapp" href="https://wa.me/919968000000" target="_blank" title="WhatsApp">💬</a>
+<button id="topBtn" class="top-btn" title="Back to top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // back to top
+  const topBtn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    if (!topBtn) return;
+    if (window.scrollY > 300) topBtn.style.display = 'block';
+    else topBtn.style.display = 'none';
+  });
+
+  topBtn && topBtn.addEventListener('click', () => 
+    window.scrollTo({top:0,behavior:'smooth'})
+  );
+</script>
+
+</body>
+</html>
